@@ -9,46 +9,10 @@ on:
 
 
 jobs:
-  build-32bit:
-    runs-on: windows-latest
-    steps:
-      - name: Install v141_xp
-        uses: thepwrtank18/install-vs-components@v1.0.0
-        with:
-          components: Microsoft.VisualStudio.Component.WinXP
-
-      - name: Checkout Source Tree
-        uses: actions/checkout@v3
-
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
-
-      - name: Configure UMSKT
-        uses: threeal/cmake-action@v1.2.0
-        with:
-          working-directory: build
-          generator: "Visual Studio 17 2022"
-          options: CMAKE_SYSTEM_VERSION="5.1.2600"
-          args: -A "Win32" -T v141_xp
-
-      - name: Build UMSKT
-        working-directory: build
-        run: msbuild ALL_BUILD.vcxproj /P:Configuration=Release /P:XPDeprecationWarning=false
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: test-Win32
-          path: build/Release
-
+# copy pasta its the same on either arch
   build-64bit:
     runs-on: windows-latest
     steps:
-      - name: Install v141_xp
-        uses: thepwrtank18/install-vs-components@v1.0.0
-        with:
-          components: Microsoft.VisualStudio.Component.WinXP
-
       - name: Checkout Source Tree
         uses: actions/checkout@v3
 
