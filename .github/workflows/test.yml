@@ -21,7 +21,7 @@ jobs:
           cd D:\_temp
           Invoke-WebRequest -URI https://7-zip.org/a/7z2301-x64.exe -OutFile 7zip.exe
           ./7zip.exe /S
-          git clone https://github.com/UMSKT/vslayout.git
+          git clone https://github.com/UMSKT/vslayout.git --depth 1
           Get-Item -Path D:\_temp\vslayout\*.* | Move-Item -Destination D:\_temp
           Remove-Item D:\_temp\vslayout -Force -Recurse
           dir D:\_temp
