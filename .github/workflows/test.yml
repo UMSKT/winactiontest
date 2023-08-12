@@ -2,9 +2,9 @@ name: shrek pls
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
   workflow_dispatch:
 
 
@@ -26,7 +26,7 @@ jobs:
           dir D:\_temp
           7z x D:\_temp\vslayout.7z.* -oD:\_temp\vslayout
           dir D:\_temp
-          cmd.exe /c D:\_temp\vslayout\vs_Enterprise.exe --quiet --norestart --nocache --noweb --wait
+          cmd.exe /c D:\_temp\vslayout\vs_BuildTools.exe --quiet --norestart --nocache --noweb --wait
           
       - name: Checkout Source Tree
         uses: actions/checkout@v3
