@@ -10,6 +10,7 @@ on:
 
 jobs:
 # copy pasta its the same on either arch
+# change reference for "Program Files" in x86, is there a better way to do this???
   build-64bit:
     runs-on: windows-latest
     steps:
@@ -27,12 +28,19 @@ jobs:
           7z x D:\_temp\vslayout.7z.* -oD:\_temp\vslayout
           dir D:\_temp
           cmd.exe /c D:\_temp\vslayout\vs_BuildTools.exe --quiet --norestart --nocache --noweb --wait
+          $Env:PATH = "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;" + $Env:PATH
           
       - name: Checkout Source Tree
         uses: actions/checkout@v3
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
+
+      - name: asdsadsdsd
+        run: |
+          echo $Env:PATH
+          where.exe cmake
+          where.exe msbuild
 
       - name: Configure UMSKT
         uses: threeal/cmake-action@v1.2.0
