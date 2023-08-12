@@ -13,6 +13,21 @@ jobs:
   build-64bit:
     runs-on: windows-latest
     steps:
+    
+      - name: Install v141_xp
+        run: |
+          mkdir D:\_temp
+          cd D:\_temp
+          Invoke-WebRequest -URI https://7-zip.org/a/7z2301-x64.exe -OutFile 7zip.exe
+          ./7zip.exe /S
+          git clone https://github.com/UMSKT/vslayout.git
+          Get-Item -Path D:\_temp\vslayout\*.* | Move-Item -Destination D:\_temp
+          Remove-Item D:\_temp\vslayout -Force -Recurse
+          dir D:\_temp
+          7z x D:\_temp\vslayout.7z.* -oD:\_temp\vslayout
+          dir D:\_temp
+          cmd.exe /c D:\_temp\vslayout\vs_BuildTools.exe --quiet --norestart --nocache --noweb --wait
+          
       - name: Checkout Source Tree
         uses: actions/checkout@v3
 
@@ -23,7 +38,7 @@ jobs:
         uses: threeal/cmake-action@v1.2.0
         with:
           generator: "Visual Studio 17 2022"
-          args: -A "x64"
+          args: -A "x64" -T v141_xp
 
       - name: Build UMSKT
         working-directory: build
