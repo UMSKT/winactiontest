@@ -28,7 +28,7 @@ jobs:
           7z x D:\_temp\vslayout.7z.* -oD:\_temp\vslayout
           dir D:\_temp
           cmd.exe /c D:\_temp\vslayout\vs_BuildTools.exe --quiet --norestart --nocache --noweb --wait
-          $Env:PATH = "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;" + $Env:PATH
+          [System.Environment]::SetEnvironmentVariable('PATH','C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;' + $Env:PATH, 'Machine')
           
       - name: Checkout Source Tree
         uses: actions/checkout@v3
